@@ -1,7 +1,10 @@
 package com.katsshura.ze.challenge.infrastructure.mongo.util;
 
+import com.katsshura.ze.challenge.domain.models.geographical.Coordinate;
 import com.katsshura.ze.challenge.domain.models.geographical.GeoInformation;
 import com.katsshura.ze.challenge.domain.models.Partner;
+import com.katsshura.ze.challenge.domain.models.geographical.GeoMultiPolygon;
+import com.katsshura.ze.challenge.domain.models.geographical.GeoPolygon;
 import com.katsshura.ze.challenge.infrastructure.mongo.dtos.PartnerRepresentation;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.geo.GeoJsonMultiPolygon;
@@ -16,8 +19,8 @@ import java.util.List;
 public class PartnerConversion {
     public PartnerRepresentation toRepresentation(Partner partner) {
         var coverageArea = toMultiPolygon(partner.getCoverageArea());
-        var longitude = partner.getAddress().getCoordinates()[0];
-        var latitude = partner.getAddress().getCoordinates()[1];
+        var longitude = partner.getAddress().getCoordinates().getLongitude();
+        var latitude = partner.getAddress().getCoordinates().getLatitude();
         var address = new GeoJsonPoint(longitude, latitude);
         return new PartnerRepresentation(
                 partner.getId(),
@@ -33,7 +36,7 @@ public class PartnerConversion {
         var coverageArea = toGeoInfo(representation.getCoverageArea());
         var longitude = representation.getAddress().getX();
         var latitude = representation.getAddress().getY();
-        var address = new GeoInformation<>(representation.getAddress().getType(), new double[]{longitude, latitude});
+        var address = new GeoInformation<>(new Coordinate(longitude, latitude));
         return new Partner(
                 representation.getId(),
                 representation.getTradingName(),
@@ -44,40 +47,39 @@ public class PartnerConversion {
         );
     }
 
-    private GeoJsonMultiPolygon toMultiPolygon(GeoInformation<List<List<List<double[]>>>> coverageArea) {
+    private GeoJsonMultiPolygon toMultiPolygon(GeoInformation<GeoMultiPolygon> coverageArea) {
         var polygons = new ArrayList<GeoJsonPolygon>();
 
-        for (var polygon: coverageArea.getCoordinates()) {
-            for (var rings: polygon) {
-                var points = new ArrayList<Point>();
+        for (var polygon: coverageArea.getCoordinates().getPolygons()) {
 
-                for (var point: rings) {
-                    points.add(new Point(point[0], point[1]));
-                }
-                polygons.add(new GeoJsonPolygon(points));
+            var points = new ArrayList<Point>();
+
+            for (var coordinate: polygon.getCoordinates()) {
+                points.add(new Point(coordinate.getLongitude(), coordinate.getLatitude()));
             }
+
+            polygons.add(new GeoJsonPolygon(points));
         }
 
         return new GeoJsonMultiPolygon(polygons);
     }
 
-    private GeoInformation<List<List<List<double[]>>>> toGeoInfo(GeoJsonMultiPolygon geoJsonMultiPolygon) {
+    private GeoInformation<GeoMultiPolygon> toGeoInfo(GeoJsonMultiPolygon geoJsonMultiPolygon) {
         var polygons = geoJsonMultiPolygon.getCoordinates();
 
-        var polys = new ArrayList<List<double[]>>();
+        var polys = new ArrayList<GeoPolygon>();
 
         for (var ring: polygons) {
-            var points = new ArrayList<double[]>();
+            var points = new ArrayList<Coordinate>();
             for (var point: ring) {
-                points.add(new double[] { point.getX(), point.getY() });
+                points.add(new Coordinate(point.getX(), point.getY()));
             }
-            polys.add(points);
+            polys.add(new GeoPolygon(points));
         }
 
-        var coordinates = new ArrayList<List<List<double[]>>>();
-        coordinates.add(polys);
+        var coordinates = new GeoMultiPolygon(polys);
 
-        var geoInfo = new GeoInformation<List<List<List<double[]>>>>(geoJsonMultiPolygon.getType(), coordinates);
+        var geoInfo = new GeoInformation<>(coordinates);
 
         return geoInfo;
     }
