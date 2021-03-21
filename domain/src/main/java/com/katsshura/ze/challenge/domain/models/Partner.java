@@ -1,6 +1,8 @@
 package com.katsshura.ze.challenge.domain.models;
 
+import com.katsshura.ze.challenge.domain.models.geographical.Coordinate;
 import com.katsshura.ze.challenge.domain.models.geographical.GeoInformation;
+import com.katsshura.ze.challenge.domain.models.geographical.GeoMultiPolygon;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,15 +15,15 @@ public class Partner {
     private final String tradingName;
     private final String ownerName;
     private final String document;
-    private final GeoInformation<List<List<List<double[]>>>> coverageArea;
-    private final GeoInformation<double[]> address;
+    private final GeoInformation<GeoMultiPolygon> coverageArea;
+    private final GeoInformation<Coordinate> address;
 
     public Partner(String id,
                    String tradingName,
                    String ownerName,
                    String document,
-                   GeoInformation<List<List<List<double[]>>>> coverageArea,
-                   GeoInformation<double[]> address)
+                   GeoInformation<GeoMultiPolygon> coverageArea,
+                   GeoInformation<Coordinate> address)
     {
         this.id = id;
         this.tradingName = tradingName;

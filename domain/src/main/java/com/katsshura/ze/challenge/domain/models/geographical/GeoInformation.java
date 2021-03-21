@@ -6,11 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GeoInformation <T> {
-    private final String type;
     private final T coordinates;
 
-    public GeoInformation(String type, T coordinates) {
-        this.type = type;
+    public GeoInformation(T coordinates) {
         this.coordinates = coordinates;
     }
 }
