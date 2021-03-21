@@ -33,17 +33,22 @@ public class PartnerMongoDatabase implements PartnerDataManagement {
 
     @Override
     public Partner find(String id) {
-        var result = repository.findById(id).get();
-        var partner = partnerConversion.toPartner(result);
-        return partner;
+        var result = repository.findById(id).isPresent()
+                ? partnerConversion.toPartner(repository.findById(id).get())
+                : null;
+
+        return result;
     }
 
     @Override
     public List<Partner> findAll() {
         var result = repository.findAll();
+
+        if (result == null) return null;
+
         var mapped = result
                 .stream()
-                .map(representation -> partnerConversion.toPartner(representation))
+                .map(partnerConversion::toPartner)
                 .collect(Collectors.toList());
         return mapped;
     }
