@@ -29,9 +29,9 @@ public class PartnerController {
         try {
             var partner = toPartner(body);
             var result = partnerManagement.save(partner);
-            return new ResponseEntity(result, HttpStatus.OK);
+            return new ResponseEntity("Partner saved with success", HttpStatus.OK);
         }catch (Exception e) {
-            return new ResponseEntity("Partner saved with success", HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
