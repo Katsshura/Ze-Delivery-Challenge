@@ -1,8 +1,11 @@
 package com.katsshura.ze.challenge.domain.mock;
 
 import com.katsshura.ze.challenge.domain.interfaces.PartnerDataManagement;
+import com.katsshura.ze.challenge.domain.models.geographical.Coordinate;
 import com.katsshura.ze.challenge.domain.models.geographical.GeoInformation;
 import com.katsshura.ze.challenge.domain.models.Partner;
+import com.katsshura.ze.challenge.domain.models.geographical.GeoMultiPolygon;
+import com.katsshura.ze.challenge.domain.models.geographical.GeoPolygon;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,26 +39,29 @@ public class PartnerDataManagementMock implements PartnerDataManagement {
                         "Zé da Silva",
                         "1432132123891/0001",
                         new GeoInformation<>(
-                                "MultiPolygon",
-                                Arrays.asList(
+                                new GeoMultiPolygon(
                                         Arrays.asList(
-                                                Arrays.asList(
-                                                        new double[] { 30, 20 },
-                                                        new double[] { 45, 40 },
-                                                        new double[] { 10, 40 },
-                                                        new double[] { 30, 20 }
+                                                new GeoPolygon(
+                                                        Arrays.asList(
+                                                                new Coordinate(30, 20),
+                                                                new Coordinate(45, 40),
+                                                                new Coordinate(10, 40),
+                                                                new Coordinate(30, 20)
+                                                        )
                                                 ),
-                                                Arrays.asList(
-                                                        new double[] { 15, 5 },
-                                                        new double[] { 40, 10 },
-                                                        new double[] { 10, 20 },
-                                                        new double[] { 5, 10 },
-                                                        new double[] { 15, 5 }
+                                                new GeoPolygon(
+                                                        Arrays.asList(
+                                                                new Coordinate(15, 5),
+                                                                new Coordinate(40, 10),
+                                                                new Coordinate(10, 20),
+                                                                new Coordinate(5, 10),
+                                                                new Coordinate(15, 5)
+                                                        )
                                                 )
                                         )
                                 )
                         ),
-                        new GeoInformation<>("Point", new double[] { -46.57421, -21.785741 })
+                        new GeoInformation<>(new Coordinate(-46.57421, -21.785741))
                 ),
                 new Partner(
                         "1",
@@ -63,26 +69,29 @@ public class PartnerDataManagementMock implements PartnerDataManagement {
                         "Zé da Silva",
                         "1432132123891/0001",
                         new GeoInformation<>(
-                                "MultiPolygon",
-                                Arrays.asList(
+                                new GeoMultiPolygon(
                                         Arrays.asList(
-                                                Arrays.asList(
-                                                        new double[] { 30, 20 },
-                                                        new double[] { 45, 40 },
-                                                        new double[] { 10, 40 },
-                                                        new double[] { 30, 20 }
+                                                new GeoPolygon(
+                                                        Arrays.asList(
+                                                                new Coordinate(30, 20),
+                                                                new Coordinate(45, 40),
+                                                                new Coordinate(10, 40),
+                                                                new Coordinate(30, 20)
+                                                        )
                                                 ),
-                                                Arrays.asList(
-                                                        new double[] { 15, 5 },
-                                                        new double[] { 40, 10 },
-                                                        new double[] { 10, 20 },
-                                                        new double[] { 5, 10 },
-                                                        new double[] { 15, 5 }
+                                                new GeoPolygon(
+                                                        Arrays.asList(
+                                                                new Coordinate(15, 5),
+                                                                new Coordinate(40, 10),
+                                                                new Coordinate(10, 20),
+                                                                new Coordinate(5, 10),
+                                                                new Coordinate(15, 5)
+                                                        )
                                                 )
                                         )
                                 )
                         ),
-                        new GeoInformation<>("Point", new double[] { -46.57421, -21.785741 })
+                        new GeoInformation<>(new Coordinate(-46.57421, -21.785741))
                 )
         );
     }
