@@ -8,12 +8,14 @@ import org.springframework.data.mongodb.core.geo.GeoJson;
 import org.springframework.data.mongodb.core.geo.GeoJsonMultiPolygon;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.geo.GeoJsonPolygon;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class PartnerConversion {
-    public static PartnerRepresentation toRepresentation(Partner partner) {
+    public PartnerRepresentation toRepresentation(Partner partner) {
         var coverageArea = toMultiPolygon(partner.getCoverageArea());
         var longitude = partner.getAddress().getCoordinates()[0];
         var latitude = partner.getAddress().getCoordinates()[1];
@@ -28,7 +30,7 @@ public class PartnerConversion {
         );
     }
 
-    public static Partner toPartner(PartnerRepresentation representation) {
+    public Partner toPartner(PartnerRepresentation representation) {
         var coverageArea = toGeoInfo(representation.getCoverageArea());
         var longitude = representation.getAddress().getX();
         var latitude = representation.getAddress().getY();
@@ -43,25 +45,24 @@ public class PartnerConversion {
         );
     }
 
-    private static GeoJsonMultiPolygon toMultiPolygon(GeoInformation<List<List<List<double[]>>>> coverageArea) {
+    private GeoJsonMultiPolygon toMultiPolygon(GeoInformation<List<List<List<double[]>>>> coverageArea) {
         var polygons = new ArrayList<GeoJsonPolygon>();
 
         for (var polygon: coverageArea.getCoordinates()) {
-
-            var points = new ArrayList<Point>();
-
             for (var rings: polygon) {
+                var points = new ArrayList<Point>();
+
                 for (var point: rings) {
                     points.add(new Point(point[0], point[1]));
                 }
+                polygons.add(new GeoJsonPolygon(points));
             }
-            polygons.add(new GeoJsonPolygon(points));
         }
 
         return new GeoJsonMultiPolygon(polygons);
     }
 
-    private static GeoInformation<List<List<List<double[]>>>> toGeoInfo(GeoJsonMultiPolygon geoJsonMultiPolygon) {
+    private GeoInformation<List<List<List<double[]>>>> toGeoInfo(GeoJsonMultiPolygon geoJsonMultiPolygon) {
         var polygons = geoJsonMultiPolygon.getCoordinates();
 
         var polys = new ArrayList<List<double[]>>();
