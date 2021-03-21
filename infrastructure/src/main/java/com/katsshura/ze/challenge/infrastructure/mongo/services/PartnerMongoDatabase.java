@@ -13,14 +13,16 @@ import java.util.stream.Collectors;
 public class PartnerMongoDatabase implements PartnerDataManagement {
 
     private final PartnerRepository repository;
+    private final PartnerConversion partnerConversion;
 
-    public PartnerMongoDatabase(PartnerRepository repository) {
+    public PartnerMongoDatabase(PartnerRepository repository, PartnerConversion partnerConversion) {
         this.repository = repository;
+        this.partnerConversion = partnerConversion;
     }
 
     @Override
     public boolean save(Partner partner) {
-        var representation = PartnerConversion.toRepresentation(partner);
+        var representation = partnerConversion.toRepresentation(partner);
         try {
             repository.save(representation);
             return true;
@@ -32,7 +34,7 @@ public class PartnerMongoDatabase implements PartnerDataManagement {
     @Override
     public Partner find(String id) {
         var result = repository.findById(id).get();
-        var partner = PartnerConversion.toPartner(result);
+        var partner = partnerConversion.toPartner(result);
         return partner;
     }
 
@@ -41,7 +43,7 @@ public class PartnerMongoDatabase implements PartnerDataManagement {
         var result = repository.findAll();
         var mapped = result
                 .stream()
-                .map(representation -> PartnerConversion.toPartner(representation))
+                .map(representation -> partnerConversion.toPartner(representation))
                 .collect(Collectors.toList());
         return mapped;
     }
