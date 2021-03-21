@@ -1,6 +1,6 @@
 package com.katsshura.ze.challenge.infrastructure.mocked;
 
-import com.katsshura.ze.challenge.domain.models.GeoInformation;
+import com.katsshura.ze.challenge.domain.models.geographical.GeoInformation;
 import com.katsshura.ze.challenge.domain.models.Partner;
 
 import java.util.Arrays;

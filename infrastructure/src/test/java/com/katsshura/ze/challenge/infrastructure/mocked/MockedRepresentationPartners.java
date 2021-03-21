@@ -1,6 +1,5 @@
 package com.katsshura.ze.challenge.infrastructure.mocked;
 
-import com.katsshura.ze.challenge.domain.models.GeoInformation;
 import com.katsshura.ze.challenge.infrastructure.mongo.dtos.PartnerRepresentation;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 

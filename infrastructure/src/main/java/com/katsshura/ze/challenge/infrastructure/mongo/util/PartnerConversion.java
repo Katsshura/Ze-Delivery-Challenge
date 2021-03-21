@@ -1,10 +1,9 @@
 package com.katsshura.ze.challenge.infrastructure.mongo.util;
 
-import com.katsshura.ze.challenge.domain.models.GeoInformation;
+import com.katsshura.ze.challenge.domain.models.geographical.GeoInformation;
 import com.katsshura.ze.challenge.domain.models.Partner;
 import com.katsshura.ze.challenge.infrastructure.mongo.dtos.PartnerRepresentation;
 import org.springframework.data.geo.Point;
-import org.springframework.data.mongodb.core.geo.GeoJson;
 import org.springframework.data.mongodb.core.geo.GeoJsonMultiPolygon;
 import org.springframework.data.mongodb.core.geo.GeoJsonPoint;
 import org.springframework.data.mongodb.core.geo.GeoJsonPolygon;

@@ -1,4 +1,4 @@
-package com.katsshura.ze.challenge.domain.models;
+package com.katsshura.ze.challenge.domain.models.geographical;
 
 import lombok.Getter;
 import lombok.Setter;

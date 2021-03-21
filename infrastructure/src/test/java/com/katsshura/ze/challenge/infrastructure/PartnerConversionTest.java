@@ -1,6 +1,6 @@
 package com.katsshura.ze.challenge.infrastructure;
 
-import com.katsshura.ze.challenge.domain.models.GeoInformation;
+import com.katsshura.ze.challenge.domain.models.geographical.GeoInformation;
 import com.katsshura.ze.challenge.infrastructure.mocked.MockedDomainPartners;
 import com.katsshura.ze.challenge.infrastructure.mocked.MockedGeoInformation;
 import com.katsshura.ze.challenge.infrastructure.mocked.MockedGeoJsonMultiPolygons;

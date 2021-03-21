@@ -1,5 +1,6 @@
 package com.katsshura.ze.challenge.domain.models;
 
+import com.katsshura.ze.challenge.domain.models.geographical.GeoInformation;
 import lombok.Getter;
 import lombok.Setter;
 

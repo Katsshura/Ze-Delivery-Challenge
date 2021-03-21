@@ -2,7 +2,7 @@ package com.katsshura.zechallenge.api.controllers;
 
 import com.katsshura.ze.challenge.domain.interfaces.PartnerDataManagement;
 import com.katsshura.ze.challenge.domain.interfaces.PartnerServiceDefinition;
-import com.katsshura.ze.challenge.domain.models.GeoInformation;
+import com.katsshura.ze.challenge.domain.models.geographical.GeoInformation;
 import com.katsshura.ze.challenge.domain.models.Partner;
 import com.katsshura.zechallenge.api.viewModels.PartnerModel;
 import org.springframework.http.HttpStatus;
