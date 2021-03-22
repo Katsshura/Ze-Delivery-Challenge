@@ -5,6 +5,7 @@ import com.katsshura.ze.challenge.domain.models.geographical.Coordinate;
 import com.katsshura.ze.challenge.domain.models.geographical.GeoInformation;
 import com.katsshura.ze.challenge.domain.models.geographical.GeoMultiPolygon;
 import com.katsshura.ze.challenge.domain.models.geographical.GeoPolygon;
+import com.katsshura.zechallenge.api.viewModels.CoordinateModel;
 import com.katsshura.zechallenge.api.viewModels.GeoInformationModel;
 import com.katsshura.zechallenge.api.viewModels.PartnerModel;
 import org.springframework.data.geo.Point;
@@ -60,6 +61,10 @@ public class ViewModelConversion {
         model.setCoverageArea(coverageArea);
 
         return model;
+    }
+
+    public Coordinate toDomainCoordinate(CoordinateModel model) {
+        return new Coordinate(model.getLongitude(), model.getLatitude());
     }
 
     private List<List<List<double[]>>> getListCoordinates(GeoMultiPolygon coordinates) {
