@@ -2,11 +2,14 @@ package com.katsshura.ze.challenge.infrastructure.mongo.services;
 
 import com.katsshura.ze.challenge.domain.interfaces.PartnerDataManagement;
 import com.katsshura.ze.challenge.domain.models.Partner;
+import com.katsshura.ze.challenge.domain.models.geographical.GeographicalPartner;
 import com.katsshura.ze.challenge.infrastructure.mongo.repositories.PartnerRepository;
 import com.katsshura.ze.challenge.infrastructure.mongo.util.PartnerConversion;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
@@ -51,6 +54,20 @@ public class PartnerMongoDatabase implements PartnerDataManagement {
                 .map(partnerConversion::toPartner)
                 .collect(Collectors.toList());
         return mapped;
+    }
+
+    @Override
+    public Set<GeographicalPartner> findAllGeographicalPartner() {
+        var partners = findAll();
+
+        if(partners == null) return null;
+
+        var result = partners
+                .stream()
+                .map(partnerConversion::toGeographicalPartner)
+                .collect(Collectors.toSet());
+
+        return result;
     }
 
     @Override
