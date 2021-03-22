@@ -1,10 +1,7 @@
 package com.katsshura.ze.challenge.infrastructure.mongo.util;
 
-import com.katsshura.ze.challenge.domain.models.geographical.Coordinate;
-import com.katsshura.ze.challenge.domain.models.geographical.GeoInformation;
+import com.katsshura.ze.challenge.domain.models.geographical.*;
 import com.katsshura.ze.challenge.domain.models.Partner;
-import com.katsshura.ze.challenge.domain.models.geographical.GeoMultiPolygon;
-import com.katsshura.ze.challenge.domain.models.geographical.GeoPolygon;
 import com.katsshura.ze.challenge.infrastructure.mongo.dtos.PartnerRepresentation;
 import org.springframework.data.geo.Point;
 import org.springframework.data.mongodb.core.geo.GeoJsonMultiPolygon;
@@ -13,7 +10,9 @@ import org.springframework.data.mongodb.core.geo.GeoJsonPolygon;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class PartnerConversion {
@@ -45,6 +44,29 @@ public class PartnerConversion {
                 coverageArea,
                 address
         );
+    }
+
+    public GeographicalPartner toGeographicalPartner(Partner partner) {
+        var coverageArea = partner.getCoverageArea().getCoordinates();
+        return new GeographicalPartner(
+                partner.getId(),
+                partner.getAddress().getCoordinates(),
+                coverageArea
+        );
+    }
+
+    private HashSet<Coordinate> getAllCoordinatesFromCoverageArea(GeoMultiPolygon coordinates) {
+        var coverageArea = new HashSet<Coordinate>();
+
+        for (var polygon: coordinates.getPolygons()) {
+            for (var coordinate: polygon.getCoordinates()) {
+                if (!coverageArea.contains(coordinate)) {
+                    coverageArea.add(coordinate);
+                }
+            }
+        }
+
+        return coverageArea;
     }
 
     private GeoJsonMultiPolygon toMultiPolygon(GeoInformation<GeoMultiPolygon> coverageArea) {
