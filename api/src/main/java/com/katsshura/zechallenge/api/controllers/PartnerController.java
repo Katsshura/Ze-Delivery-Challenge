@@ -2,7 +2,9 @@ package com.katsshura.zechallenge.api.controllers;
 
 import com.katsshura.ze.challenge.domain.interfaces.PartnerDataManagement;
 import com.katsshura.ze.challenge.domain.interfaces.PartnerServiceDefinition;
+import com.katsshura.ze.challenge.domain.models.geographical.Coordinate;
 import com.katsshura.zechallenge.api.util.ViewModelConversion;
+import com.katsshura.zechallenge.api.viewModels.CoordinateModel;
 import com.katsshura.zechallenge.api.viewModels.PartnerModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,6 +60,21 @@ public class PartnerController {
             return partner != null
                     ? new ResponseEntity(conversion.toViewModelPartner(partner), HttpStatus.OK)
                     : new ResponseEntity(HttpStatus.NO_CONTENT);
+        }catch (Exception e) {
+            return new ResponseEntity(e, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    private ResponseEntity searchNearestPartner(@RequestBody CoordinateModel model) {
+        try {
+            var res = partnerService.getNearestPartnerBasedOnLocation(conversion.toDomainCoordinate(model));
+
+            if (res == null) {
+                return new ResponseEntity(HttpStatus.NO_CONTENT);
+            }
+
+            return new ResponseEntity(res, HttpStatus.OK);
         }catch (Exception e) {
             return new ResponseEntity(e, HttpStatus.INTERNAL_SERVER_ERROR);
         }
