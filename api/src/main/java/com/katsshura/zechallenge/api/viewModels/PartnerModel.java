@@ -1,7 +1,6 @@
 package com.katsshura.zechallenge.api.viewModels;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.katsshura.ze.challenge.domain.models.GeoInformation;
 import lombok.Getter;
 import lombok.Setter;
 

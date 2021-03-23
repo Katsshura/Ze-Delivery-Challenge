@@ -1,6 +1,7 @@
 package com.katsshura.ze.challenge.infrastructure;
 
-import com.katsshura.ze.challenge.domain.models.GeoInformation;
+import com.katsshura.ze.challenge.domain.models.geographical.GeoInformation;
+import com.katsshura.ze.challenge.domain.models.geographical.GeoMultiPolygon;
 import com.katsshura.ze.challenge.infrastructure.mocked.MockedDomainPartners;
 import com.katsshura.ze.challenge.infrastructure.mocked.MockedGeoInformation;
 import com.katsshura.ze.challenge.infrastructure.mocked.MockedGeoJsonMultiPolygons;
@@ -60,28 +61,28 @@ public class PartnerConversionTest {
                 () -> assertEquals(domainPartner.getTradingName(), result.getTradingName()),
                 () -> assertEquals(domainPartner.getOwnerName(), result.getOwnerName()),
                 () -> assertEquals(domainPartner.getDocument(), result.getDocument()),
-                () -> assertEquals(domainPartner.getCoverageArea().getType(), result.getCoverageArea().getType()),
-                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().get(0).get(0).get(0)[1], result.getCoverageArea().getCoordinates().get(0).get(0).get(0)[1]),
-                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().get(0).get(0).get(1)[0], result.getCoverageArea().getCoordinates().get(0).get(0).get(1)[0]),
-                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().get(0).get(0).get(0)[0], result.getCoverageArea().getCoordinates().get(0).get(0).get(0)[0]),
-                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().get(0).get(0).get(1)[1], result.getCoverageArea().getCoordinates().get(0).get(0).get(1)[1]),
-                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().get(0).get(0).get(2)[0], result.getCoverageArea().getCoordinates().get(0).get(0).get(2)[0]),
-                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().get(0).get(0).get(2)[1], result.getCoverageArea().getCoordinates().get(0).get(0).get(2)[1]),
-                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().get(0).get(0).get(3)[0], result.getCoverageArea().getCoordinates().get(0).get(0).get(3)[0]),
-                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().get(0).get(0).get(3)[1], result.getCoverageArea().getCoordinates().get(0).get(0).get(3)[1]),
-                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().get(0).get(1).get(0)[0], result.getCoverageArea().getCoordinates().get(0).get(1).get(0)[0]),
-                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().get(0).get(1).get(0)[1], result.getCoverageArea().getCoordinates().get(0).get(1).get(0)[1]),
-                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().get(0).get(1).get(1)[0], result.getCoverageArea().getCoordinates().get(0).get(1).get(1)[0]),
-                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().get(0).get(1).get(1)[1], result.getCoverageArea().getCoordinates().get(0).get(1).get(1)[1]),
-                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().get(0).get(1).get(2)[0], result.getCoverageArea().getCoordinates().get(0).get(1).get(2)[0]),
-                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().get(0).get(1).get(2)[1], result.getCoverageArea().getCoordinates().get(0).get(1).get(2)[1]),
-                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().get(0).get(1).get(3)[0], result.getCoverageArea().getCoordinates().get(0).get(1).get(3)[0]),
-                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().get(0).get(1).get(3)[1], result.getCoverageArea().getCoordinates().get(0).get(1).get(3)[1]),
-                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().get(0).get(1).get(4)[0], result.getCoverageArea().getCoordinates().get(0).get(1).get(4)[0]),
-                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().get(0).get(1).get(4)[1], result.getCoverageArea().getCoordinates().get(0).get(1).get(4)[1]),
-                () -> assertEquals(domainPartner.getAddress().getType(), result.getAddress().getType()),
-                () -> assertEquals(domainPartner.getAddress().getCoordinates()[0], result.getAddress().getCoordinates()[0]),
-                () -> assertEquals(domainPartner.getAddress().getCoordinates()[1], result.getAddress().getCoordinates()[1])
+                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().getType(), result.getCoverageArea().getCoordinates().getType()),
+                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().getPolygons().get(0).getCoordinates().get(0).getLatitude(),  result.getCoverageArea().getCoordinates().getPolygons().get(0).getCoordinates().get(0).getLatitude()),
+                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().getPolygons().get(0).getCoordinates().get(0).getLongitude(), result.getCoverageArea().getCoordinates().getPolygons().get(0).getCoordinates().get(0).getLongitude()),
+                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().getPolygons().get(0).getCoordinates().get(1).getLatitude(),  result.getCoverageArea().getCoordinates().getPolygons().get(0).getCoordinates().get(1).getLatitude()),
+                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().getPolygons().get(0).getCoordinates().get(1).getLongitude(), result.getCoverageArea().getCoordinates().getPolygons().get(0).getCoordinates().get(1).getLongitude()),
+                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().getPolygons().get(0).getCoordinates().get(2).getLatitude(),  result.getCoverageArea().getCoordinates().getPolygons().get(0).getCoordinates().get(2).getLatitude()),
+                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().getPolygons().get(0).getCoordinates().get(2).getLongitude(), result.getCoverageArea().getCoordinates().getPolygons().get(0).getCoordinates().get(2).getLongitude()),
+                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().getPolygons().get(0).getCoordinates().get(3).getLatitude(),  result.getCoverageArea().getCoordinates().getPolygons().get(0).getCoordinates().get(3).getLatitude()),
+                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().getPolygons().get(0).getCoordinates().get(3).getLongitude(), result.getCoverageArea().getCoordinates().getPolygons().get(0).getCoordinates().get(3).getLongitude()),
+                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(0).getLatitude(),  result.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(0).getLatitude()),
+                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(0).getLongitude(), result.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(0).getLongitude()),
+                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(1).getLatitude(),  result.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(1).getLatitude()),
+                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(1).getLongitude(), result.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(1).getLongitude()),
+                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(2).getLatitude(),  result.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(2).getLatitude()),
+                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(2).getLongitude(), result.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(2).getLongitude()),
+                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(3).getLatitude(),  result.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(3).getLatitude()),
+                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(3).getLongitude(), result.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(3).getLongitude()),
+                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(4).getLatitude(),  result.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(4).getLatitude()),
+                () -> assertEquals(domainPartner.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(4).getLongitude(), result.getCoverageArea().getCoordinates().getPolygons().get(1).getCoordinates().get(4).getLongitude()),
+                () -> assertEquals(domainPartner.getAddress().getCoordinates().getType(), result.getAddress().getCoordinates().getType()),
+                () -> assertEquals(domainPartner.getAddress().getCoordinates().getLongitude(), result.getAddress().getCoordinates().getLongitude()),
+                () -> assertEquals(domainPartner.getAddress().getCoordinates().getLatitude(), result.getAddress().getCoordinates().getLatitude())
         );
     }
 
@@ -101,8 +102,8 @@ public class PartnerConversionTest {
                 () -> assertEquals(multiPolygon.getCoordinates().get(0).getCoordinates().get(0).getCoordinates().get(1), result.getCoordinates().get(0).getCoordinates().get(0).getCoordinates().get(1)),
                 () -> assertEquals(multiPolygon.getCoordinates().get(0).getCoordinates().get(0).getCoordinates().get(2), result.getCoordinates().get(0).getCoordinates().get(0).getCoordinates().get(2)),
                 () -> assertEquals(multiPolygon.getCoordinates().get(0).getCoordinates().get(0).getCoordinates().get(3), result.getCoordinates().get(0).getCoordinates().get(0).getCoordinates().get(3)),
-                () -> assertEquals(multiPolygon.getCoordinates().get(1).getCoordinates().get(0).getCoordinates().get(0), result.getCoordinates().get(1).getCoordinates().get(0).getCoordinates().get(0)),
                 () -> assertEquals(multiPolygon.getCoordinates().get(1).getCoordinates().get(0).getCoordinates().get(1), result.getCoordinates().get(1).getCoordinates().get(0).getCoordinates().get(1)),
+                () -> assertEquals(multiPolygon.getCoordinates().get(1).getCoordinates().get(0).getCoordinates().get(0), result.getCoordinates().get(1).getCoordinates().get(0).getCoordinates().get(0)),
                 () -> assertEquals(multiPolygon.getCoordinates().get(1).getCoordinates().get(0).getCoordinates().get(2), result.getCoordinates().get(1).getCoordinates().get(0).getCoordinates().get(2)),
                 () -> assertEquals(multiPolygon.getCoordinates().get(1).getCoordinates().get(0).getCoordinates().get(3), result.getCoordinates().get(1).getCoordinates().get(0).getCoordinates().get(3)),
                 () -> assertEquals(multiPolygon.getCoordinates().get(1).getCoordinates().get(0).getCoordinates().get(4), result.getCoordinates().get(1).getCoordinates().get(0).getCoordinates().get(4))
@@ -117,28 +118,28 @@ public class PartnerConversionTest {
         var partnerConversion = new PartnerConversion();
         var privateMethod = partnerConversion.getClass().getDeclaredMethod("toGeoInfo", GeoJsonMultiPolygon.class);
         privateMethod.setAccessible(true);
-        var result = (GeoInformation<List<List<List<double[]>>>>)privateMethod.invoke(partnerConversion, multiPolygon);
+        var result = (GeoInformation<GeoMultiPolygon>)privateMethod.invoke(partnerConversion, multiPolygon);
 
         assertAll(
-                () -> assertEquals(geoInfo.getType(), result.getType()),
-                () -> assertEquals(geoInfo.getCoordinates().get(0).get(0).get(0)[0], result.getCoordinates().get(0).get(0).get(0)[0]),
-                () -> assertEquals(geoInfo.getCoordinates().get(0).get(0).get(0)[1], result.getCoordinates().get(0).get(0).get(0)[1]),
-                () -> assertEquals(geoInfo.getCoordinates().get(0).get(0).get(1)[0], result.getCoordinates().get(0).get(0).get(1)[0]),
-                () -> assertEquals(geoInfo.getCoordinates().get(0).get(0).get(1)[1], result.getCoordinates().get(0).get(0).get(1)[1]),
-                () -> assertEquals(geoInfo.getCoordinates().get(0).get(0).get(2)[0], result.getCoordinates().get(0).get(0).get(2)[0]),
-                () -> assertEquals(geoInfo.getCoordinates().get(0).get(0).get(2)[1], result.getCoordinates().get(0).get(0).get(2)[1]),
-                () -> assertEquals(geoInfo.getCoordinates().get(0).get(0).get(3)[0], result.getCoordinates().get(0).get(0).get(3)[0]),
-                () -> assertEquals(geoInfo.getCoordinates().get(0).get(0).get(3)[1], result.getCoordinates().get(0).get(0).get(3)[1]),
-                () -> assertEquals(geoInfo.getCoordinates().get(0).get(1).get(0)[0], result.getCoordinates().get(0).get(1).get(0)[0]),
-                () -> assertEquals(geoInfo.getCoordinates().get(0).get(1).get(0)[1], result.getCoordinates().get(0).get(1).get(0)[1]),
-                () -> assertEquals(geoInfo.getCoordinates().get(0).get(1).get(1)[0], result.getCoordinates().get(0).get(1).get(1)[0]),
-                () -> assertEquals(geoInfo.getCoordinates().get(0).get(1).get(1)[1], result.getCoordinates().get(0).get(1).get(1)[1]),
-                () -> assertEquals(geoInfo.getCoordinates().get(0).get(1).get(2)[0], result.getCoordinates().get(0).get(1).get(2)[0]),
-                () -> assertEquals(geoInfo.getCoordinates().get(0).get(1).get(2)[1], result.getCoordinates().get(0).get(1).get(2)[1]),
-                () -> assertEquals(geoInfo.getCoordinates().get(0).get(1).get(3)[0], result.getCoordinates().get(0).get(1).get(3)[0]),
-                () -> assertEquals(geoInfo.getCoordinates().get(0).get(1).get(3)[1], result.getCoordinates().get(0).get(1).get(3)[1]),
-                () -> assertEquals(geoInfo.getCoordinates().get(0).get(1).get(4)[0], result.getCoordinates().get(0).get(1).get(4)[0]),
-                () -> assertEquals(geoInfo.getCoordinates().get(0).get(1).get(4)[1], result.getCoordinates().get(0).get(1).get(4)[1])
+                () -> assertEquals(geoInfo.getCoordinates().getType(), result.getCoordinates().getType()),
+                () -> assertEquals(geoInfo.getCoordinates().getPolygons().get(0).getCoordinates().get(0).getLatitude(),  result.getCoordinates().getPolygons().get(0).getCoordinates().get(0).getLatitude()),
+                () -> assertEquals(geoInfo.getCoordinates().getPolygons().get(0).getCoordinates().get(0).getLongitude(), result.getCoordinates().getPolygons().get(0).getCoordinates().get(0).getLongitude()),
+                () -> assertEquals(geoInfo.getCoordinates().getPolygons().get(0).getCoordinates().get(1).getLatitude(),  result.getCoordinates().getPolygons().get(0).getCoordinates().get(1).getLatitude()),
+                () -> assertEquals(geoInfo.getCoordinates().getPolygons().get(0).getCoordinates().get(1).getLongitude(), result.getCoordinates().getPolygons().get(0).getCoordinates().get(1).getLongitude()),
+                () -> assertEquals(geoInfo.getCoordinates().getPolygons().get(0).getCoordinates().get(2).getLatitude(),  result.getCoordinates().getPolygons().get(0).getCoordinates().get(2).getLatitude()),
+                () -> assertEquals(geoInfo.getCoordinates().getPolygons().get(0).getCoordinates().get(2).getLongitude(), result.getCoordinates().getPolygons().get(0).getCoordinates().get(2).getLongitude()),
+                () -> assertEquals(geoInfo.getCoordinates().getPolygons().get(0).getCoordinates().get(3).getLatitude(),  result.getCoordinates().getPolygons().get(0).getCoordinates().get(3).getLatitude()),
+                () -> assertEquals(geoInfo.getCoordinates().getPolygons().get(0).getCoordinates().get(3).getLongitude(), result.getCoordinates().getPolygons().get(0).getCoordinates().get(3).getLongitude()),
+                () -> assertEquals(geoInfo.getCoordinates().getPolygons().get(1).getCoordinates().get(0).getLatitude(),  result.getCoordinates().getPolygons().get(1).getCoordinates().get(0).getLatitude()),
+                () -> assertEquals(geoInfo.getCoordinates().getPolygons().get(1).getCoordinates().get(0).getLongitude(), result.getCoordinates().getPolygons().get(1).getCoordinates().get(0).getLongitude()),
+                () -> assertEquals(geoInfo.getCoordinates().getPolygons().get(1).getCoordinates().get(1).getLatitude(),  result.getCoordinates().getPolygons().get(1).getCoordinates().get(1).getLatitude()),
+                () -> assertEquals(geoInfo.getCoordinates().getPolygons().get(1).getCoordinates().get(1).getLongitude(), result.getCoordinates().getPolygons().get(1).getCoordinates().get(1).getLongitude()),
+                () -> assertEquals(geoInfo.getCoordinates().getPolygons().get(1).getCoordinates().get(2).getLatitude(),  result.getCoordinates().getPolygons().get(1).getCoordinates().get(2).getLatitude()),
+                () -> assertEquals(geoInfo.getCoordinates().getPolygons().get(1).getCoordinates().get(2).getLongitude(), result.getCoordinates().getPolygons().get(1).getCoordinates().get(2).getLongitude()),
+                () -> assertEquals(geoInfo.getCoordinates().getPolygons().get(1).getCoordinates().get(3).getLatitude(),  result.getCoordinates().getPolygons().get(1).getCoordinates().get(3).getLatitude()),
+                () -> assertEquals(geoInfo.getCoordinates().getPolygons().get(1).getCoordinates().get(3).getLongitude(), result.getCoordinates().getPolygons().get(1).getCoordinates().get(3).getLongitude()),
+                () -> assertEquals(geoInfo.getCoordinates().getPolygons().get(1).getCoordinates().get(4).getLatitude(),  result.getCoordinates().getPolygons().get(1).getCoordinates().get(4).getLatitude()),
+                () -> assertEquals(geoInfo.getCoordinates().getPolygons().get(1).getCoordinates().get(4).getLongitude(), result.getCoordinates().getPolygons().get(1).getCoordinates().get(4).getLongitude())
         );
     }
 }
