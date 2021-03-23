@@ -4,12 +4,8 @@ import com.katsshura.ze.challenge.domain.models.geographical.Coordinate;
 import com.katsshura.ze.challenge.domain.models.geographical.GeoInformation;
 import com.katsshura.ze.challenge.domain.models.geographical.GeoMultiPolygon;
 import lombok.Getter;
-import lombok.Setter;
-
-import java.util.List;
 
 @Getter
-@Setter
 public class Partner {
     private final String id;
     private final String tradingName;
@@ -31,5 +27,13 @@ public class Partner {
         this.document = document;
         this.coverageArea = coverageArea;
         this.address = address;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Partner)) return false;
+        Partner partner = (Partner) o;
+        return getId().equals(partner.getId());
     }
 }
