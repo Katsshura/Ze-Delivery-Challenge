@@ -49,6 +49,7 @@
 
 - Import the project inside your preferred IDE
 - Make sure all modules were imported.
+- Run ```docker-compose --file docker-compose-mongodb.yml up``` on the root folder
 - Run ```ApiApplication``` inside api module
 - Open [Swagger UI](http://localhost:8080/api/v1/swagger-ui.html)
 - You can use Postman for your requests. [Click Here](https://www.getpostman.com/collections/1ddc11077ac30ad48d18) to get the collection.
