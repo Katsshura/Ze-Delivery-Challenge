@@ -2,10 +2,12 @@ package com.katsshura.zechallenge.api.controllers;
 
 import com.katsshura.ze.challenge.domain.interfaces.PartnerDataManagement;
 import com.katsshura.ze.challenge.domain.interfaces.PartnerServiceDefinition;
-import com.katsshura.ze.challenge.domain.models.geographical.Coordinate;
 import com.katsshura.zechallenge.api.util.ViewModelConversion;
 import com.katsshura.zechallenge.api.viewModels.CoordinateModel;
 import com.katsshura.zechallenge.api.viewModels.PartnerModel;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@ApiResponses(value = {
+        @ApiResponse(code = 200, message = "Partner saved with success"),
+        @ApiResponse(code = 204, message = "We couldn't find any match for your request"),
+        @ApiResponse(code = 400, message = "You must provide a valid body!"),
+        @ApiResponse(code = 500, message = "Something went wrong with ours servers"),
+})
 @RestController
 @RequestMapping("/partner")
 public class PartnerController {
@@ -27,6 +35,7 @@ public class PartnerController {
         this.conversion = conversion;
     }
 
+    @ApiOperation(value = "Create a partner on database.")
     @RequestMapping(value = "/create/single", method = RequestMethod.POST)
     private ResponseEntity createPartner(@RequestBody PartnerModel body) {
         try {
@@ -38,7 +47,7 @@ public class PartnerController {
         }
     }
 
-
+    @ApiOperation(value = "Create multiple partners on database.")
     @RequestMapping(value = "/create/multiple", method = RequestMethod.POST)
     private ResponseEntity createPartner(@RequestBody List<PartnerModel> body) {
         try {
@@ -53,6 +62,7 @@ public class PartnerController {
         }
     }
 
+    @ApiOperation(value = "Returns a partner if found by Id on database, else returns NO_CONTENT")
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     private ResponseEntity findPartnerById(@PathVariable String id) {
         try {
@@ -65,6 +75,7 @@ public class PartnerController {
         }
     }
 
+    @ApiOperation(value = "Search the nearest partner to the provided location")
     @RequestMapping(value = "/search", method = RequestMethod.POST)
     private ResponseEntity searchNearestPartner(@RequestBody CoordinateModel model) {
         try {
