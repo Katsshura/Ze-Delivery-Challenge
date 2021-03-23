@@ -7,7 +7,6 @@ import com.katsshura.ze.challenge.infrastructure.mongo.repositories.PartnerRepos
 import com.katsshura.ze.challenge.infrastructure.mongo.util.PartnerConversion;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;

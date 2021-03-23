@@ -10,9 +10,6 @@ import org.springframework.data.mongodb.core.geo.GeoJsonPolygon;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Component
 public class PartnerConversion {
@@ -53,20 +50,6 @@ public class PartnerConversion {
                 partner.getAddress().getCoordinates(),
                 coverageArea
         );
-    }
-
-    private HashSet<Coordinate> getAllCoordinatesFromCoverageArea(GeoMultiPolygon coordinates) {
-        var coverageArea = new HashSet<Coordinate>();
-
-        for (var polygon: coordinates.getPolygons()) {
-            for (var coordinate: polygon.getCoordinates()) {
-                if (!coverageArea.contains(coordinate)) {
-                    coverageArea.add(coordinate);
-                }
-            }
-        }
-
-        return coverageArea;
     }
 
     private GeoJsonMultiPolygon toMultiPolygon(GeoInformation<GeoMultiPolygon> coverageArea) {
