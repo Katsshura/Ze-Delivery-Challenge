@@ -51,7 +51,7 @@ public class PartnerService implements PartnerServiceDefinition {
         return partnerDataManagement.find(nearestPartnerId);
     }
 
-    public double[] getXCoordinates(Set<Coordinate> coordinates) {
+    private double[] getXCoordinates(Set<Coordinate> coordinates) {
         var xCoordinates = new double[coordinates.size()];
         var coords = coordinates.iterator();
 
@@ -62,7 +62,7 @@ public class PartnerService implements PartnerServiceDefinition {
         return xCoordinates;
     }
 
-    public double[] getYCoordinates(Set<Coordinate> coordinates) {
+    private double[] getYCoordinates(Set<Coordinate> coordinates) {
         var yCoordinates = new double[coordinates.size()];
         var coords = coordinates.iterator();
 
@@ -73,7 +73,7 @@ public class PartnerService implements PartnerServiceDefinition {
         return yCoordinates;
     }
 
-    public double calculateDistanceBetweenCoordinates(Coordinate actual, Coordinate destiny) {
+    private double calculateDistanceBetweenCoordinates(Coordinate actual, Coordinate destiny) {
         //Formula to calculate distance: d=√((x1-x2)²+(y1-y2)²)
 
         var x1 = actual.getLongitude();
@@ -94,7 +94,7 @@ public class PartnerService implements PartnerServiceDefinition {
         return res;
     }
 
-    public boolean isCoordinateInsidePolygon(int totalVertices, double[] xCoordinates, double[] yCoordinates, Coordinate target) {
+    private boolean isCoordinateInsidePolygon(int totalVertices, double[] xCoordinates, double[] yCoordinates, Coordinate target) {
         var j = totalVertices - 1;
         var isContained = false;
 
